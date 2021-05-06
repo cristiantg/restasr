@@ -37,9 +37,7 @@ spk_id=$6
 # 3. Decoding the audio file
 mkdir -p $output_folder
 audio_file="${input_folder}/${input_file_name}"
-echo $input_folder $input_file_name
 if [ -f "$audio_file" ]; then
-    echo "netrooo"
     utt=$input_file_name
     m_bestsym="${output_file_name}_1bestsym.ctm"
 
