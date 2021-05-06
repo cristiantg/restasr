@@ -73,9 +73,9 @@ Kaldi project for real-time decoding.
     ├── raw_data # Here you put your audio files
     ├── README.md
     ├── server-load.sh
-    ├── steps -> /vol/tensusers3/ctejedor/lacristianmachine/opt/kaldi/egs/wsj/s5/steps/
+    ├── steps # Kaldi-wsj files
     ├── uber_single.sh
-    └── utils -> /vol/tensusers3/ctejedor/lacristianmachine/opt/kaldi/egs/wsj/s5/utils/
+    └── utils # Kaldi-wsj files
     
     17 directories, 45 files
 
@@ -87,5 +87,7 @@ Kaldi project for real-time decoding.
 
 ## Contact and credits
 Cristian Tejedor-García
+
 [Centre for Language and Speech Technology](https://www.ru.nl/clst/)
+
 Email: cristian [dot] tejedorgarcia [at] ru [dot] nl
