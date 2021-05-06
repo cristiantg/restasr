@@ -1,0 +1,6 @@
+exp/*
+!exp/.gitkeep
+raw_data/*
+!raw_data/.gitkeep
+output/*
+!output/.gitkeep
