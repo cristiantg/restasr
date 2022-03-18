@@ -13,10 +13,6 @@
 
 
 # 2. Prepare configuration
-# 
-# 2.1 Your models must be prepared beforehand:
-# steps/online/nnet3/prepare_online_decoding.sh --mfcc-config conf/mfcc_hires.conf data/lang_chain exp/nnet3_cleaned/extractor exp/chain_cleaned/tdnn1a_sp_bi exp/tdnn1a_sp_bi_online
-# utils/mkgraph.sh --self-loop-scale 1.0 data/lang_s_test_tgpr exp/tdnn1a_sp_bi_online exp/tdnn1a_sp_bi_online/graph_s
 #
 # 2.2 Be sure your wav file is in the correct format:
 # sox source_data/spk001/bird_original.wav -r 16000 -c 1 -b 16 raw_data/spk001/bird.wav
@@ -45,17 +41,17 @@ if [ -f "$audio_file" ]; then
     --online=false \
     --do-endpointing=false \
     --frame-subsampling-factor=3 \
-    --config=${1}/exp/tdnn1a_sp_bi_online/conf/online.conf \
+    --config=${1}/model/tdnn/v1.0/conf/online.conf \
     --max-active=7000 \
     --beam=15.0 \
     --lattice-beam=6.0 \
     --acoustic-scale=1.0 \
-    --word-symbol-table=${1}/exp/tdnn1a_sp_bi_online/graph_s/words.txt \
-    ${1}/exp/tdnn1a_sp_bi_online/final.mdl \
-    ${1}/exp/tdnn1a_sp_bi_online/graph_s/HCLG.fst \
+    --word-symbol-table=${1}/out_hclg/words.txt \
+    ${1}/model/tdnn/v1.0/final.mdl \
+    ${1}/model/tdnn/v1.0/graph_s/HCLG.fst \
     'ark:echo '$spk_id' '$utt'|' \
     'scp:echo '$utt' '$audio_file'|' \
-    ark:- | lattice-to-ctm-conf ark:- $output_folder/$m_bestsym
-                
-    ${1}/utils/int2sym.pl -f 5 ${1}/exp/tdnn1a_sp_bi_online/graph_s/words.txt $output_folder/$m_bestsym > $output_folder/$output_file_name
+    ark:- | lattice-to-ctm-conf --frame-shift=0.03 --inv-acoustic-scale=10 ark:- $output_folder/$m_bestsym
+
+    ${1}/utils/int2sym.pl -f 5 ${1}/out_hclg/words.txt $output_folder/$m_bestsym > $output_folder/$output_file_name
 fi

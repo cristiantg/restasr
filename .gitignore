@@ -4,3 +4,7 @@ raw_data/*
 !raw_data/.gitkeep
 output/*
 !output/.gitkeep
+out_hclg/*
+!out_hclg/.gitkeep
+utils/*
+!utils/.gitkeep
