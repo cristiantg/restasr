@@ -2,9 +2,9 @@
 
 # Decodes a single audio file in real-time
 
-# run: ./uber_single.sh . input_folder input_file_name output_folder output_file_name spk_id
-# r.a. example: ./uber_single.sh . raw_data/other bird.wav output2/other bird speaker
-# r.b. optimized: ./uber_single.sh . raw_data/other bird.wav output2/other bird speaker > somefile 2>&1
+# run: ./uber_single.sh . input_folder input_file_name output_folder output_file_name spk_id beam
+# r.a. example: ./uber_single.sh . raw_data/other bird.wav output2/other bird speaker 15
+# r.b. optimized: ./uber_single.sh . raw_data/other bird.wav output2/other bird speaker 15 > somefile 2>&1
 
 
 # 1. Prepare environment
@@ -43,7 +43,7 @@ if [ -f "$audio_file" ]; then
     --frame-subsampling-factor=3 \
     --config=${1}/model/tdnn/v1.0/conf/online.conf \
     --max-active=7000 \
-    --beam=15.0 \
+    --beam=${7} \
     --lattice-beam=6.0 \
     --acoustic-scale=1.0 \
     --word-symbol-table=${1}/out_hclg/words.txt \
